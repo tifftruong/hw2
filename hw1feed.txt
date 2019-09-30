@@ -1,0 +1,16 @@
+from: Sean Munson
+post: So uploading separately (as-is) is probably easiest for you and no problem for us.
+from: Sean Munson
+post: Sorry about that inconsistency! Either is okay for this assignment; Canvas has gotten better about how it shows instructors multiple files.
+from: Jordan Yoon-Buck
+post: Hi, I have a question about what to turn into canvas for homework 0.  In the readme, in “What to hand in via Canvas &amp; Github Classroom”, it says:  &gt; 1. Attach a single document (PDF preferred), containing &gt;  - A screenshot of running your edited hw0.py (part 6) &gt;  - Text you write for parts 7 and 8, in hw0.txt  Later in “Finally, turn hw0 in” it says:  &gt; To turn it in on Canvas, visit the course page, click on assignments, find hw0, and upload hw0.py, hw0.txt, and your screenshot.  Would you prefer hw0.txt and the screenshot as one pdf, or should we upload them as is?
+from: Sean Munson
+post: Both are at the Odegaard lost and found (info desk upstairs)
+from: Sean Munson
+post: Also this water bottle 
+from: Sean Munson
+post: Did someone drop a lightning to headphone adapter at table 2?
+from: Sean Munson
+post: If you are on Mac and getting told that you have to agree to the Developer prompt, there are two ways to do that:  1) space through the prompt it in terminal until you get to the place where it asks you to agree. The first times I tried this, I spaced right past that, but eventually got it. 2) Alternatively, opening xcode and clicking agree *should* work, though sometimes that dialog box doesn’t open.
+from: Sean Munson
+post: 
