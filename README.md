@@ -172,7 +172,6 @@ would: 3
 if: 6
 we: 4
 do: 3
-: 3
 a: 8
 with: 3
 but: 3
@@ -187,6 +186,8 @@ should: 5
 have: 5
 ...
 ```
+
+Note that, depending how you remove punctuation, you *may* have a blank entry. That's okay! So is getting rid of it. Numbers will also count as words.
 
 ## Part 8: Counting word frequency in posts or replies
 For this part, write a function, `wordFreq()`, that will return the word frequency in either posts or replies as a dictionary
