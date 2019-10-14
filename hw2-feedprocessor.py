@@ -17,12 +17,17 @@ print("== part 3 ==")
 # parameter and return the field type (either post, reply, or from).
 
 def fieldType(line):
-    # fill in your code here
+    if line.startswith('from:'):
+        return 'from'
+    elif line.startswith('post:'):
+        return 'post'
+    else:
+        return 'reply'
 
 # You can uncomment and test your function with these lines
-#print(fieldType("from: Sean"))
-#print(fieldType("post: Hi everyone"))
-#print(fieldType("reply: Thanks!"))
+print(fieldType("from: Sean"))
+print(fieldType("post: Hi everyone"))
+print(fieldType("reply: Thanks!"))
 
 print("== part 4 ==")
 # Find out and print how many posts there are
@@ -43,6 +48,11 @@ fname = "hw2feed.txt"
 f = open(fname,'r',encoding='utf-8')
 
 # Fill in your code here.
+for line in f:
+    if line.startswith('from:'):
+        replies = replies + 1
+    elif line.startswith('post:'):
+        posts = posts + 1
 
 print("Total posts: %d"%posts)
 print("Total replies: %d"%replies)
@@ -69,7 +79,12 @@ print("== part 5 ==")
 fname = "hw2feed.txt"
 f = open(fname,'r',encoding='utf-8')
 #fill in code here
-
+name = ''
+for line in f:
+    if fieldType(line) == 'from':
+        name = line[6:len(line)-1]
+    if fieldType(line) == 'post':
+        print(name)
 
 print("== part 6 ==")
 ### part 6: counting poster contribution frequency
@@ -98,16 +113,24 @@ f = open(fname,'r',encoding='utf-8')
 # read in and count the total number of posts and replies for each user
 #fill in code here
 print("== 6a ==")
-
+for line in f:
+    if fieldType(line) == 'from':
+        name = line[6:len(line) - 1]
+        if name in postreply_count:
+            postreply_count[name] = postreply_count[name] + 1
+        else:
+            postreply_count[name] = 1
 
 # print the number of times each user posted and replied
 #fill in code here
-
+names = postreply_count.keys()
+for line in names:
+    print(line + ': ' + str(postreply_count[line]))
 
 # part 6b - How many unique posters/repliers were there?
 print("== 6b ==")
 # (hint: it's one line of code now that you have postreply_count)
-
+print(str(len(names)) + ' unique posters')
 print("== part 7 ==")
 ### part 7: counting word frequency
 # This is similar to post count in part 6 and you might
@@ -125,12 +148,24 @@ f = open(fname,'r',encoding='utf-8')
 
 # read in and count of times each word appeared
 #fill in code here
-
+for line in f:
+    if fieldType(line) == 'post':
+        postLine = line[6:].lower()
+        splitLine = postLine.split()
+        for word in splitLine:
+            word = stripWordPunctuation(word)
+            if word in postWordCount:
+                postWordCount[word] = postWordCount[word] + 1
+            else:
+                postWordCount[word] = 1
 
 # print the number of times each word appeared, but only if the word
 # appeared at least three times
 #fill in code here
-
+keys = postWordCount.keys()
+for word in keys:
+    if postWordCount[word] > 2:
+        print(word + ': ' + str(postWordCount[word]))
 
 print("== part 8 ==")
 ### part 8: counting word frequency in replies and posts
@@ -149,19 +184,44 @@ print("== part 8 ==")
 # to meet the requirements for this part.
 
 # uncomment and begin editing from the next line:
-#def wordFreq
+def wordFreq(file, type):
+    postResult = {}
+    replyResult = {}
+    f = open(file, 'r', encoding='utf-8')
+    for line in f:
+        if (fieldType(line) == 'post'):
+            postLine = line[6:].lower()
+            splitLine = postLine.split()
+            for word in splitLine:
+                word = stripWordPunctuation(word)
+                if word in postResult:
+                    postResult[word] = postResult[word] + 1
+                else:
+                    postResult[word] = 1
+        elif (fieldType(line) == 'reply'):
+            postLine = line[7:].lower()
+            splitLine = postLine.split()
+            for word in splitLine:
+                word = stripWordPunctuation(word)
+                if word in replyResult:
+                    replyResult[word] = replyResult[word] + 1
+                else:
+                    replyResult[word] = 1
+    if (type == 'post'):
+        return postResult
+    else:
+        return replyResult
 
 # to test ,you can uncomment and run these lines:
-#wfp = wordFreq(fname,'post')
-#if wfp.get("characters",0) == 4 and wfp.get("reluctant",0) == 1 and wfp.get("hi",0) == 3 and wfp.get("homework",0) == 2:
-#    print("Looks like wordFreq() works fine for posts")
-#else:
-#    print("We got some errors with wordFreq() for posts.")
-# 
-#wfr = wordFreq(fname,'reply') 
-#print(wfr)
-#if wfr.get("rubric") == 1 and wfr.get("the",0) == 2 and wfr.get("multiple",0) == 1:
-#    print("Looks like wordFreq() works fine for replies")
-#else:
-#    print("We got some errors with wordFreq() for replies.")
+wfp = wordFreq(fname,'post')
+if wfp.get("characters",0) == 4 and wfp.get("reluctant",0) == 1 and wfp.get("hi",0) == 3 and wfp.get("homework",0) == 2:
+    print("Looks like wordFreq() works fine for posts")
+else:
+    print("We got some errors with wordFreq() for posts.")
+
+wfr = wordFreq(fname,'reply')
+if wfr.get("rubric") == 1 and wfr.get("the",0) == 2 and wfr.get("multiple",0) == 1:
+    print("Looks like wordFreq() works fine for replies")
+else:
+    print("We got some errors with wordFreq() for replies.")
 
